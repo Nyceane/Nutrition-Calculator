@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, FoodIntake!</string>
+    <string name="app_name">Nutrition Calculator</string>
+
+	<string name="food_filter_title">Food Category:</string>
+	
+	<string name="category_grain">Grains</string>
+	<string name="category_fruits">Fruits</string>
+	<string name="category_vegetables">Vegetables</string>
+	<string name="category_dairy">Dairy</string>
+	<string name="category_meats">Protein</string>
+	<string name="category_extras">Extras</string>
+
+	<!--Menu-->
+    <string name="menu_help">Help</string>
+    <string name="menu_feedback">Feedback</string>
+    <string name="menu_settings">Settings</string>
+	
+</resources>
