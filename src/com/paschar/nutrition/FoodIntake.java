@@ -306,4 +306,12 @@ public class FoodIntake extends Activity {
                 return true;
         }
     }
+
+
+    public void btnPayment_Clicked(View view)
+	{
+        Intent myIntent = new Intent(view.getContext(), Payment.class);
+        startActivityForResult(myIntent, 0);
+
+    }
 }
