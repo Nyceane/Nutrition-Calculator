@@ -2,25 +2,19 @@ package com.paschar.nutrition;
 
 import java.util.ArrayList;
 
-import org.xmlpull.v1.XmlPullParser;
-
-
 import com.paschar.nutrition.R;
-import com.paschar.utilities.DraggableIcon;
 
 import android.R.color;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.util.Xml;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +27,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class FoodIntake extends Activity {
+    static final String TAG = "FoodIntake";
 
 	private GridView gridFood;
 	private GridView gridIntake;
@@ -46,10 +41,6 @@ public class FoodIntake extends Activity {
 	protected ArrayList<FoodObject> _arrayIntake;
 	protected ArrayList<FoodObject> _arrayFood;
 	
-    private boolean mDragInProgress;
-    private boolean mHovering;
-    private boolean mAcceptsDrag;
-    
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +57,7 @@ public class FoodIntake extends Activity {
 
 		//Setup Intake
 		_arrayIntake = new ArrayList<FoodObject>();
+		gridIntake.setOnDragListener(new BoxDragListener());
 	}
 	
 	public void SetFoodFilter(int foodcategory)
@@ -164,7 +156,7 @@ public class FoodIntake extends Activity {
 	public void btnCalculate_Clicked(View target)
 	{
 		
-		String url = "http://beta.ipickupsports.com/mobile/foodsummary/Default.aspx?FoodIdArray=";
+		String url = "http://www.ipickupsports.com/mobile/foodsummary/Default.aspx?FoodIdArray=";
 		for(int i = 0; i < _arrayIntake.size(); i++)
 		{
 			for(int j = 0; j < _arrayIntake.get(i).GetServings(); j++)
@@ -231,33 +223,6 @@ public class FoodIntake extends Activity {
         	iconView.setImageResource(_arrayFood.get(position).GetDrawableId());
         	iconView.mFoodId = position;
             return iconView;
-        	
-        	//XmlPullParser parser = mContext.getResources().getXml(id);
-        	//AttributeSet attributes = Xml.asAttributeSet(parser);
-        	
-        	/*ImageButton imageButton;
-            if (convertView == null) {
-            	imageButton = new ImageButton(mContext);
-            	imageButton.setBackgroundColor(color.transparent);
-            	imageButton.setLayoutParams(new GridView.LayoutParams(100, 100));
-               	imageButton.setAdjustViewBounds(false);
-                imageButton.setBackgroundResource(_arrayFood.get(position).GetDrawableId());
-                imageButton.setTag(position);
-
-                
-                imageButton.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View view) {
-                    	//ImageButton imageButton = (ImageButton)view;
-                    	//FoodIntake.this.AddFood(Integer.valueOf(imageButton.getTag().toString()));
-                        ClipData data = ClipData.newPlainText("dot", "Dot : " + view.toString());
-                        view.startDrag(data, new ANRShadowBuilder(view, true), (Object)view, 0);
-        			}
-                });
-                
-            } else {
-            	imageButton = (ImageButton) convertView;
-            }
-*/
         }
 
         private Context mContext;
@@ -324,4 +289,33 @@ public class FoodIntake extends Activity {
             super.onDrawShadow(canvas);
         }
     }
+    
+    class BoxDragListener implements OnDragListener{
+        boolean insideOfMe = false;
+        Drawable border = null;
+        //Drawable redBorder = getResources().getDrawable(R.drawable.border3);
+        @Override
+        public boolean onDrag(View self, DragEvent event) {
+                if (event.getAction() == DragEvent.ACTION_DRAG_STARTED){
+                        border = self.getBackground();
+                        gridIntake.setBackgroundColor(Color.CYAN);
+                } else if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED){ 
+                        insideOfMe = true;
+                        gridIntake.setBackgroundColor(Color.BLUE);
+                } else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED){
+                        insideOfMe = false;
+                        gridIntake.setBackgroundColor(Color.TRANSPARENT);
+                } else if (event.getAction() == DragEvent.ACTION_DROP){
+                        if (insideOfMe){
+                        	Log.i(TAG, "Exited dot Tag@ " + self.getTag());
+                        }
+                    	Log.i(TAG, "Dropped the icon");
+                } else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED){
+                        self.setBackgroundDrawable(border);        
+                    	Log.i(TAG, "Drag Ended");
+
+                }
+                return true;
+        }
+}
 }
