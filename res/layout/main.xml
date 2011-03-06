@@ -18,18 +18,33 @@
 			android:orientation="vertical"
 			android:background="@drawable/foodcat"
 			>
-			<GridView android:id="@+id/gridFood"		
-			    android:layout_width="fill_parent"
-			    android:layout_height="fill_parent"
-			    android:layout_weight="1"
-			    android:padding="1dp"
-			    android:verticalSpacing="5dp"
-			    android:horizontalSpacing="5dp"
-			    android:numColumns="auto_fit"
-			    android:columnWidth="125dp"
-			    android:stretchMode="columnWidth"
-			    android:gravity="center" />
-			 <LinearLayout
+			<com.paschar.nutrition.ViewScroller android:id="@+id/flipper"
+         android:layout_width="wrap_content"
+         android:layout_height="fill_parent">
+	      <GridView android:id="@+id/gridFood"    
+	          android:layout_width="fill_parent"
+	          android:layout_height="wrap_content"
+	          android:layout_weight="1"
+	          android:padding="1dp"
+	          android:verticalSpacing="5dp"
+	          android:horizontalSpacing="5dp"
+	          android:numColumns="auto_fit"
+	          android:columnWidth="125dp"
+	          android:stretchMode="columnWidth"
+	          android:gravity="center" />
+        <GridView android:id="@+id/gridFood2"    
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="1dp"
+            android:verticalSpacing="5dp"
+            android:horizontalSpacing="5dp"
+            android:numColumns="auto_fit"
+            android:columnWidth="125dp"
+            android:stretchMode="columnWidth"
+            android:gravity="center" />
+      </com.paschar.nutrition.ViewScroller>
+      <LinearLayout
 			 	android:layout_width="fill_parent" 
 				android:layout_height="wrap_content"
 				android:layout_weight="0"

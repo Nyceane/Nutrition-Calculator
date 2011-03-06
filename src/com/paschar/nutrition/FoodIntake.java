@@ -3,6 +3,7 @@ package com.paschar.nutrition;
 import java.util.ArrayList;
 
 import com.paschar.nutrition.R;
+import com.paschar.nutrition.adapters.FoodAdapter;
 
 import android.R.color;
 import android.app.Activity;
@@ -17,21 +18,26 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.DragShadowBuilder;
 import android.view.View.OnDragListener;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
+
 
 public class FoodIntake extends Activity {
     static final String TAG = "FoodIntake";
 
-	private GridView gridFood;
+    private ViewFlipper flipper;
+    private GridView gridFood;
 	private GridView gridIntake;
 	
 	private TextView txtFoodCategory;
@@ -42,13 +48,13 @@ public class FoodIntake extends Activity {
 	private int mFoodPositionId;
 	
 	protected ArrayList<FoodObject> _arrayIntake;
-	protected ArrayList<FoodObject> _arrayFood;
 	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		flipper = (ViewFlipper)findViewById(R.id.flipper);
 		gridIntake = (GridView)findViewById(R.id.gridIntake);
 		gridFood = (GridView)findViewById(R.id.gridFood);
 		txtFoodCategory = (TextView)findViewById(R.id.txtFoodCategory);
@@ -61,7 +67,32 @@ public class FoodIntake extends Activity {
 		//Setup Intake
 		_arrayIntake = new ArrayList<FoodObject>();
 		gridIntake.setOnDragListener(new BoxDragListener());
+
+		disableEvents(flipper);
 	}
+
+	public void disableEvents(ViewGroup viewGroup) {
+		Log.i("Events", "===============disabling start");
+    	//ArrayList<View> views = view.getTouchables();
+    	int viewCount = viewGroup.getChildCount();
+    	Log.i("Events", "View Count = " + String.valueOf(viewCount));
+    	for (int i=0; i < viewCount; i++){
+    		Log.i("Events", "----------------disable onTouch");
+    		View v = viewGroup.getChildAt(i);
+        	v.setOnTouchListener(new View.OnTouchListener() {
+    			
+    			@Override
+    			public boolean onTouch(View v, MotionEvent event) {
+    				// TODO Auto-generated method stub
+    				return false;
+    			}
+    		});
+        	if (v instanceof ViewGroup) {
+            	disableEvents((ViewGroup)v);
+        	}
+    	}
+	}
+	
 	
 	public void SetFoodFilter(int foodcategory)
 	{
@@ -82,31 +113,25 @@ public class FoodIntake extends Activity {
 		switch(foodcategory)
 		{
 			case FoodObject.FOODTYPE_GRAINS:
-				_arrayFood = FoodObject.getGrains();
 				txtFoodCategory.setText(getResources().getString(R.string.food_filter_title) + getResources().getString(R.string.category_grain));
 				break;
 			case FoodObject.FOODTYPE_FRUITS:
-				_arrayFood = FoodObject.getFruits();
 				txtFoodCategory.setText(getResources().getString(R.string.food_filter_title) + getResources().getString(R.string.category_fruits));
 				break;
 			case FoodObject.FOODTYPE_VEGETABLES:
-				_arrayFood = FoodObject.getVegetables();
 				txtFoodCategory.setText(getResources().getString(R.string.food_filter_title) + getResources().getString(R.string.category_vegetables));
 				break;
 			case FoodObject.FOODTYPE_DIARY:
-				_arrayFood = FoodObject.getDairy();
 				txtFoodCategory.setText(getResources().getString(R.string.food_filter_title) + getResources().getString(R.string.category_dairy));
 				break;
 			case FoodObject.FOODTYPE_MEAT:
-				_arrayFood = FoodObject.getMeat();
 				txtFoodCategory.setText(getResources().getString(R.string.food_filter_title) + getResources().getString(R.string.category_meats));
 				break;
 			case FoodObject.FOODTYPE_EXTRAS:
-				_arrayFood = FoodObject.getExtras();
 				txtFoodCategory.setText(getResources().getString(R.string.food_filter_title) + getResources().getString(R.string.category_extras));
 				break;
 		}
-		gridFood.setAdapter(new FoodAdapter(this));
+		gridFood.setAdapter(new FoodAdapter(this, foodcategory));
 	}
 	
 	public void btnForward_Clicked(View target)
@@ -136,7 +161,7 @@ public class FoodIntake extends Activity {
 	public void AddFood(int position)
 	{
 		boolean neverTaken = true;
-		FoodObject foodtaken = _arrayFood.get(position);
+		FoodObject foodtaken = (FoodObject)gridFood.getAdapter().getItem(position);
 		for(int i = 0; i < _arrayIntake.size(); i++)
 		{
 			if(_arrayIntake.get(i).GetFoodId() == foodtaken.GetFoodId())
@@ -192,56 +217,6 @@ public class FoodIntake extends Activity {
 		
 		alert.show();
 	}
-	
-	//Adapter for the left bucket
-	public class FoodAdapter extends BaseAdapter{
-        public FoodAdapter(Context c) {
-            mContext = c;
-        }
-
-        public int getCount() {
-            return _arrayFood.size();
-        }
-
-        public Object getItem(int position) {
-            return position;
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-        	ImageView iconView;
-        	if (convertView == null) {
-        		iconView = new FoodView(mContext);
-            	iconView.setBackgroundColor(color.transparent);
-            	iconView.setLayoutParams(new GridView.LayoutParams(100, 100));
-               	//iconView.setAdjustViewBounds(false);
-                FoodIntake.this.mFoodPositionId = position;
-        	}
-        	else {
-        		iconView = (FoodView)convertView;
-        	}
-        	iconView.setImageResource(_arrayFood.get(position).GetDrawableId());
-
-        	final int clickPosition = position;
-        	iconView.setOnLongClickListener(new View.OnLongClickListener() {
-                public boolean onLongClick(View v) {
-                    ClipData data = ClipData.newPlainText("food_id", String.valueOf(clickPosition));
-                    DragShadowBuilder shadowBuilder = new DragShadowBuilder(v);
-                    v.startDrag(data, shadowBuilder, v, 0);
-                    FoodIntake.this.mFoodPositionId = clickPosition;
-                    return true;
-                }
-            });
-            return iconView;
-        }
-
-        private Context mContext;
-	}
-	
-	
 	
 	//Adapter for the right bucket
     public class IntakeAdapter extends BaseAdapter {
@@ -334,5 +309,5 @@ public class FoodIntake extends Activity {
                 }
                 return true;
         }
-}
+    }
 }
