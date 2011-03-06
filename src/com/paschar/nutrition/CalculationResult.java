@@ -66,7 +66,7 @@ public class CalculationResult extends Activity{
 	public boolean onCreateOptionsMenu(Menu menu) {		
 		// sets the search menu button key
 		menu.add(0, MENU_NOTES, 0, "Take notes")
-		.setIcon(android.R.drawable.ic_menu_agenda)
+		.setIcon(R.drawable.note_menu)
 		.setAlphabeticShortcut(SearchManager.MENU_KEY);
 		
 		menu.add(0, MENU_FACEBOOK, 0, "Facebook")
@@ -121,7 +121,7 @@ public class CalculationResult extends Activity{
 			        {
 			        	Uri imageUri = Uri.fromFile(thefile);
 			        	
-			        	notes.createNote("Catch Health Snapshot Graph taken\n\n" +"#nutrition", imageUri);
+			        	notes.createNote("Nutrition Calculator Snapshot Graph taken\n\n" +"#nutrition", imageUri);
 			   	    }
 			        
 			    } catch (Exception e) {

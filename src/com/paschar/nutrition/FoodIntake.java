@@ -20,9 +20,9 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.View.DragShadowBuilder;
 import android.view.View.OnDragListener;
 import android.widget.BaseAdapter;
@@ -51,6 +51,8 @@ public class FoodIntake extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		flipper = (ViewFlipper)findViewById(R.id.flipper);
@@ -221,6 +223,7 @@ public class FoodIntake extends Activity {
             	servingText.setLayoutParams(new GridView.LayoutParams(100, 100));
             	servingText.setBackgroundResource(_arrayIntake.get(position).GetDrawableId());
             	servingText.setTag(position);
+            	servingText.setTextSize(30);
             	servingText.setTextColor(Color.BLACK);
             	servingText.setOnClickListener(new View.OnClickListener() {
                  	public void onClick(View view) {
