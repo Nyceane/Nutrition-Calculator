@@ -5,6 +5,7 @@
 		android:layout_height="fill_parent"
 		android:orientation="horizontal"
 		android:gravity="center"
+		android:background="@drawable/bg_boards"
 		android:id="@+id/LinearLayout01">
 		<LinearLayout
 			android:layout_width="fill_parent" 
@@ -16,7 +17,8 @@
 			android:layout_height="fill_parent"
 			android:layout_weight="1"
 			android:orientation="vertical"
-			android:background="@drawable/foodcat"
+			android:paddingLeft="20dp"
+			android:paddingTop="120dp"
 			>
 			<com.paschar.nutrition.ViewScroller android:id="@+id/flipper"
          android:layout_width="wrap_content"
@@ -87,7 +89,8 @@
 			android:layout_height="fill_parent"
 			android:layout_weight="1"
 			android:orientation="vertical"
-			android:background="@drawable/intake"
+			android:paddingLeft="20dp"
+			android:paddingTop="10dp"
 		>
 		<GridView android:id="@+id/gridIntake"		
 		    android:layout_width="fill_parent"
@@ -107,15 +110,18 @@
 				android:layout_gravity="center|bottom"
 				android:gravity="center|bottom"
 			>
-				<Button
+				<ImageButton
+					android:background="@android:color/transparent"
+					android:paddingBottom="35dp"
 					android:id="@+id/btnCalculate"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
+					android:src="@drawable/calculate_button"
 					android:text="Calculate"
 					android:onClick="btnCalculate_Clicked"
-				/>
-            <Button
+				/>					
+				            <Button
                    android:id="@+id/btnPayment"
                    android:gravity="right"
                    android:layout_height="wrap_content"
