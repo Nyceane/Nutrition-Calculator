@@ -66,33 +66,8 @@ public class FoodIntake extends Activity {
 		//Setup Intake
 		_arrayIntake = new ArrayList<FoodObject>();
 		gridIntake.setOnDragListener(new BoxDragListener());
-
-		disableEvents(flipper);
 	}
 
-	public void disableEvents(ViewGroup viewGroup) {
-		Log.i("Events", "===============disabling start");
-    	//ArrayList<View> views = view.getTouchables();
-    	int viewCount = viewGroup.getChildCount();
-    	Log.i("Events", "View Count = " + String.valueOf(viewCount));
-    	for (int i=0; i < viewCount; i++){
-    		Log.i("Events", "----------------disable onTouch");
-    		View v = viewGroup.getChildAt(i);
-        	v.setOnTouchListener(new View.OnTouchListener() {
-    			
-    			@Override
-    			public boolean onTouch(View v, MotionEvent event) {
-    				// TODO Auto-generated method stub
-    				return false;
-    			}
-    		});
-        	if (v instanceof ViewGroup) {
-            	disableEvents((ViewGroup)v);
-        	}
-    	}
-	}
-	
-	
 	public void SetFoodFilter(int foodcategory)
 	{
 		currentCategory = foodcategory;

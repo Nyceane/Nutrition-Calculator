@@ -7,10 +7,11 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ViewFlipper;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.GridView;
 
 public class ViewScroller extends ViewFlipper {
-	float oldTouchValue = 0;
+	static float touchDownX = 0;
 	int category;
 	int nextCategory;
 	private Context mContext;
@@ -31,28 +32,52 @@ public class ViewScroller extends ViewFlipper {
 
 	
 	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		Log.i("Intercept", "Intercept Event" + String.valueOf(ev.getAction()));
+		//this.onTouchEvent(ev);
+		//super.onInterceptTouchEvent(ev);
+
+		// Capture it if it's on this view.
+		switch (ev.getAction()) {
+			case MotionEvent.ACTION_DOWN: {
+				Log.i("Scroller", "Intercept: ACTION_DOWN");
+				touchDownX = ev.getX();
+				return false;
+			}
+		    case MotionEvent.ACTION_MOVE: {
+	        	Log.i("Scroller", "Intercept: ACTION_MOVE");
+	        	int distance = (int)(ev.getX() - touchDownX);
+
+	        	// Skip tiny moves
+	        	if (Math.abs(distance) >= 5){
+	        		return true;
+	        	}
+	        	else {
+	        		return false;
+	        	}
+		    }
+		}
+		return false;
+	}
+
+	
+	@Override
 	public boolean onTouchEvent(MotionEvent touchEvent) {
 	  super.onTouchEvent(touchEvent);
-	  Log.i("Scroller", "Touch Event" + String.valueOf(touchEvent.getAction()));
 	  switch (touchEvent.getAction()) {
-	    case MotionEvent.ACTION_DOWN: {
-	    	Log.i("Scroller", "ACTION_DOWN");
-	    	oldTouchValue = touchEvent.getX();
-	    	break;
-	    }
 	    case MotionEvent.ACTION_UP: {
-	    	Log.i("Scroller", "ACTION_UP");
+	    	Log.i("Scroller", "Scroller: ACTION_UP");
         	if (nextCategory < 1 || nextCategory > 6) {
         		return false;
         	}
         	
 			float currentX = touchEvent.getX();
-			if (oldTouchValue < currentX) {
+			if (touchDownX < currentX) {
 				this.setInAnimation(AnimationHelper.inFromLeftAnimation());
 				this.setOutAnimation(AnimationHelper.outToRightAnimation());
 				this.showNext();
 			}
-			if (oldTouchValue > currentX) {
+			if (touchDownX > currentX) {
 				this.setInAnimation(AnimationHelper.inFromRightAnimation());
 				this.setOutAnimation(AnimationHelper.outToLeftAnimation());
 				this.showPrevious();
@@ -60,11 +85,15 @@ public class ViewScroller extends ViewFlipper {
 			break;
 	    }
 	    case MotionEvent.ACTION_MOVE: {
-        	//Log.i("Scroller", "ACTION_MOVE");
-        	int distance = (int)(touchEvent.getX() - oldTouchValue);
+        	Log.i("Scroller", "Scroller: ACTION_MOVE");
+        	int distance = (int)(touchEvent.getX() - touchDownX);
         	final GridView currentView = (GridView)this.getCurrentView();
         	final GridView otherView;
 
+        	// Skip tiny moves
+        	if (Math.abs(distance) < 5){
+        		return false;
+        	}
         	// Create next view
         	//int childCount = this.getChildCount();
         	GridView view1 = (GridView)this.getChildAt(0);
@@ -97,12 +126,17 @@ public class ViewScroller extends ViewFlipper {
         		otherView.setAdapter(new FoodAdapter(this.mContext, nextCategory));
         	}
         	
-    	    currentView.layout(distance, currentView.getTop(), currentView.getRight(), 
-    	            currentView.getBottom());
-    	    //otherView.layout(currentView.getRight(), otherView.getTop(), 
-            //        currentView.getRight() + otherView.getWidth(), 
-            //        otherView.getBottom());
-            //otherView.setVisibility(View.VISIBLE);
+        	Log.i("Moving", "distance: " + String.valueOf(distance));
+        	Log.i("Moving", "width: " + String.valueOf(currentView.getWidth()));
+    	    currentView.layout(distance, 
+			    	    	   currentView.getTop(), 
+			    	    	   currentView.getWidth() + distance, 
+			    	           currentView.getBottom());
+//    	    otherView.layout(currentView.getRight() + 50, 
+//    	    				 currentView.getTop(), 
+//    	    				 currentView.getRight() + 50 + currentView.getWidth(), 
+//    	    				 currentView.getBottom());
+//            otherView.setVisibility(View.VISIBLE);
 	        break;
 	    }
 	  }
