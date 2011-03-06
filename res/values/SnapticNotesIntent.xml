@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="cancel_button">Cancel</string>
+	
+	<string name="upgrade_button">Upgrade</string>
+	<string name="ok_button">OK</string>
+	<string name="catchnote_required">Catch Note is required.</string>
+	<string name="error_dialog_title">Error!</string>
+	<string name="install_button">Install</string>
+	<string name="update_button">Update</string>
+	<string name="install_notes_title">Install Catch Notes?</string>
+	<string name="install_notes_message">
+		Help yourself be healthier by drinking water instead of sugary sodas, eating more fruits and veggies, and being more active.\n
+		\nKeep score with Catch Health Tracker. Chart your progress and save graphs to your Catch Notes journal. Then post your progress to Facebook and Twitter.\n
+		\nCatch Health Tracker works with Catch Notes to store your journal and your progress charts. You also can add your own notes and photos.\n
+		\nWould you like to install Catch Notes now? \n
+	</string>
+	<string name="notes_intent_error">Failed to launch the 3banana Notes intent.</string>
+	<string name="upgrade_notes_title">Upgrade Catch Notes?</string>
+	<string name="upgrade_notes_message">
+		Help yourself be healthier by drinking water instead of sugary sodas, eating more fruits and veggies, and being more active.\n
+		\nKeep score with Catch Health Tracker. Chart your progress and save graphs to your Catch Notes journal. Then post your progress to Facebook and Twitter.\n
+		\nCatch Health Tracker works with Catch Notes to store your journal and your progress charts. You also can add your own notes and photos.\n
+		\nCatch Health requires Catch Notes v2.1 or higher, would you like to update it now?
+	</string>
+	<string name="market_error_message">An error occurred while attempting to display the Android Market.</string>
+</resources>

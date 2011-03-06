@@ -9,7 +9,7 @@ package com.paschar.nutrition;
 
 public final class R {
     public static final class array {
-        public static final int food_category=0x7f050000;
+        public static final int food_category=0x7f060000;
     }
     public static final class attr {
         /** <p>Must be one of the following constant values.</p>
@@ -129,64 +129,65 @@ containing a value of this type.
         public static final int logout_button=0x7f020037;
         public static final int logout_down=0x7f020038;
         public static final int mango=0x7f020039;
-        public static final int marshmallows=0x7f02003a;
-        public static final int milk=0x7f02003b;
-        public static final int milkywaybar=0x7f02003c;
-        public static final int muffin=0x7f02003d;
-        public static final int mushroom=0x7f02003e;
-        public static final int oatmeal=0x7f02003f;
-        public static final int onion=0x7f020040;
-        public static final int orange=0x7f020041;
-        public static final int orangejuice=0x7f020042;
-        public static final int peach=0x7f020043;
-        public static final int pear=0x7f020044;
-        public static final int pizzaslice=0x7f020045;
-        public static final int plums=0x7f020046;
-        public static final int popcorn=0x7f020047;
-        public static final int potato=0x7f020048;
-        public static final int potatochips=0x7f020049;
-        public static final int pudding=0x7f02004a;
-        public static final int radish=0x7f02004b;
-        public static final int ramen=0x7f02004c;
-        public static final int salmon=0x7f02004d;
-        public static final int shrimp=0x7f02004e;
-        public static final int skim=0x7f02004f;
-        public static final int soda=0x7f020050;
-        public static final int spinach=0x7f020051;
-        public static final int strawberry=0x7f020052;
-        public static final int swiss=0x7f020053;
-        public static final int taco=0x7f020054;
-        public static final int tomateos=0x7f020055;
-        public static final int tomato=0x7f020056;
-        public static final int twitter_menu=0x7f020057;
-        public static final int walnuts=0x7f020058;
-        public static final int watermelon=0x7f020059;
-        public static final int wheatbread=0x7f02005a;
-        public static final int wheatcereal=0x7f02005b;
-        public static final int wheatcrackers=0x7f02005c;
-        public static final int whitebread=0x7f02005d;
-        public static final int whiterice=0x7f02005e;
-        public static final int yogurt=0x7f02005f;
+        public static final int market_icon=0x7f02003a;
+        public static final int marshmallows=0x7f02003b;
+        public static final int milk=0x7f02003c;
+        public static final int milkywaybar=0x7f02003d;
+        public static final int muffin=0x7f02003e;
+        public static final int mushroom=0x7f02003f;
+        public static final int oatmeal=0x7f020040;
+        public static final int onion=0x7f020041;
+        public static final int orange=0x7f020042;
+        public static final int orangejuice=0x7f020043;
+        public static final int peach=0x7f020044;
+        public static final int pear=0x7f020045;
+        public static final int pizzaslice=0x7f020046;
+        public static final int plums=0x7f020047;
+        public static final int popcorn=0x7f020048;
+        public static final int potato=0x7f020049;
+        public static final int potatochips=0x7f02004a;
+        public static final int pudding=0x7f02004b;
+        public static final int radish=0x7f02004c;
+        public static final int ramen=0x7f02004d;
+        public static final int salmon=0x7f02004e;
+        public static final int shrimp=0x7f02004f;
+        public static final int skim=0x7f020050;
+        public static final int soda=0x7f020051;
+        public static final int spinach=0x7f020052;
+        public static final int strawberry=0x7f020053;
+        public static final int swiss=0x7f020054;
+        public static final int taco=0x7f020055;
+        public static final int tomateos=0x7f020056;
+        public static final int tomato=0x7f020057;
+        public static final int twitter_menu=0x7f020058;
+        public static final int walnuts=0x7f020059;
+        public static final int watermelon=0x7f02005a;
+        public static final int wheatbread=0x7f02005b;
+        public static final int wheatcereal=0x7f02005c;
+        public static final int wheatcrackers=0x7f02005d;
+        public static final int whitebread=0x7f02005e;
+        public static final int whiterice=0x7f02005f;
+        public static final int yogurt=0x7f020060;
     }
     public static final class id {
-        public static final int LinearLayout01=0x7f060004;
-        public static final int btnCalculate=0x7f06000e;
-        public static final int btnForward=0x7f06000b;
-        public static final int btnRew=0x7f060009;
-        public static final int drop=0x7f060002;
-        public static final int flipper=0x7f060006;
-        public static final int gridFood=0x7f060007;
-        public static final int gridFood2=0x7f060008;
-        public static final int gridIntake=0x7f06000d;
-        public static final int layoutFood=0x7f060005;
-        public static final int layoutIntake=0x7f06000c;
-        public static final int menu_feedback=0x7f060010;
-        public static final int menu_help=0x7f060011;
-        public static final int menu_monthly=0x7f06000f;
-        public static final int none=0x7f060000;
-        public static final int thumbnail=0x7f060001;
-        public static final int txtFoodCategory=0x7f06000a;
-        public static final int webview=0x7f060003;
+        public static final int LinearLayout01=0x7f070004;
+        public static final int btnCalculate=0x7f07000e;
+        public static final int btnForward=0x7f07000b;
+        public static final int btnRew=0x7f070009;
+        public static final int drop=0x7f070002;
+        public static final int flipper=0x7f070006;
+        public static final int gridFood=0x7f070007;
+        public static final int gridFood2=0x7f070008;
+        public static final int gridIntake=0x7f07000d;
+        public static final int layoutFood=0x7f070005;
+        public static final int layoutIntake=0x7f07000c;
+        public static final int menu_feedback=0x7f070010;
+        public static final int menu_help=0x7f070011;
+        public static final int menu_monthly=0x7f07000f;
+        public static final int none=0x7f070000;
+        public static final int thumbnail=0x7f070001;
+        public static final int txtFoodCategory=0x7f07000a;
+        public static final int webview=0x7f070003;
     }
     public static final class layout {
         public static final int dragableicon=0x7f030000;
@@ -197,19 +198,39 @@ containing a value of this type.
         public static final int menu=0x7f080000;
     }
     public static final class string {
-        public static final int app_name=0x7f070001;
-        public static final int category_dairy=0x7f070006;
-        public static final int category_extras=0x7f070008;
-        public static final int category_fruits=0x7f070004;
-        public static final int category_grain=0x7f070003;
-        public static final int category_meats=0x7f070007;
-        public static final int category_vegetables=0x7f070005;
-        public static final int food_filter_title=0x7f070002;
-        public static final int hello=0x7f070000;
+        public static final int app_name=0x7f05000e;
+        public static final int cancel_button=0x7f050000;
+        public static final int catchnote_required=0x7f050003;
+        public static final int category_dairy=0x7f050013;
+        public static final int category_extras=0x7f050015;
+        public static final int category_fruits=0x7f050011;
+        public static final int category_grain=0x7f050010;
+        public static final int category_meats=0x7f050014;
+        public static final int category_vegetables=0x7f050012;
+        public static final int create_image_note_button=0x7f050019;
+        public static final int create_location_note_button=0x7f05001b;
+        public static final int create_quick_note_button=0x7f05001a;
+        public static final int create_simple_note_button=0x7f050018;
+        public static final int cursor_positioning_button=0x7f05001d;
+        public static final int error_dialog_title=0x7f050004;
+        public static final int food_filter_title=0x7f05000f;
+        public static final int hello=0x7f05000d;
+        public static final int install_button=0x7f050005;
+        public static final int install_notes_message=0x7f050008;
+        public static final int install_notes_title=0x7f050007;
+        public static final int market_error_message=0x7f05000c;
         /** Menu
          */
-        public static final int monthly=0x7f070009;
-        public static final int payment=0x7f07000a;
+        public static final int monthly=0x7f050016;
+        public static final int notes_intent_error=0x7f050009;
+        public static final int ok_button=0x7f050002;
+        public static final int payment=0x7f050017;
+        public static final int toast_quick_note=0x7f05001e;
+        public static final int update_button=0x7f050006;
+        public static final int upgrade_button=0x7f050001;
+        public static final int upgrade_notes_message=0x7f05000b;
+        public static final int upgrade_notes_title=0x7f05000a;
+        public static final int view_notes_button=0x7f05001c;
     }
     public static final class xml {
         public static final int dragableicon=0x7f040000;
