@@ -1,19 +1,13 @@
 package com.paschar.nutrition;
 
-import java.util.ArrayList;
-
 import com.paschar.nutrition.adapters.FoodAdapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ViewFlipper;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.GridView;
-import android.view.ViewGroup;
-
 
 public class ViewScroller extends ViewFlipper {
 	float oldTouchValue = 0;

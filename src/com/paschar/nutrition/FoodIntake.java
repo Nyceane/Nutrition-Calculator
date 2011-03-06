@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.paschar.nutrition.R;
 import com.paschar.nutrition.adapters.FoodAdapter;
 
-import android.R.color;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -23,12 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.DragShadowBuilder;
 import android.view.View.OnDragListener;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 

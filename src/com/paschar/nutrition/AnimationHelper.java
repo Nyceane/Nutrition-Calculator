@@ -3,10 +3,6 @@ package com.paschar.nutrition;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import android.view.animation.AccelerateInterpolator;
-
 
 public class AnimationHelper {
   public static Animation inFromRightAnimation() {
