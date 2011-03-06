@@ -229,6 +229,7 @@ public class FoodIntake extends Activity {
         		iconView = (FoodView)convertView;
         	}
         	iconView.setImageResource(_arrayFood.get(position).GetDrawableId());
+        	iconView.mFoodId = position;
             return iconView;
         	
         	//XmlPullParser parser = mContext.getResources().getXml(id);
