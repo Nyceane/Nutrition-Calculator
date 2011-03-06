@@ -217,10 +217,23 @@ public class FoodIntake extends Activity {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
+        	FoodView iconView;
+        	if (convertView == null) {
+        		iconView = new FoodView(mContext);
+            	iconView.setBackgroundColor(color.transparent);
+            	iconView.setLayoutParams(new GridView.LayoutParams(100, 100));
+               	//iconView.setAdjustViewBounds(false);
+                iconView.setTag(position);
+        	}
+        	else {
+        		iconView = (FoodView)convertView;
+        	}
+        	iconView.setImageResource(_arrayFood.get(position).GetDrawableId());
+            return iconView;
+        	
         	//XmlPullParser parser = mContext.getResources().getXml(id);
         	//AttributeSet attributes = Xml.asAttributeSet(parser);
         	
-        	DraggableIcon imageButton = new DraggableIcon(mContext, _arrayFood.get(position).GetDrawableId(), position);
         	/*ImageButton imageButton;
             if (convertView == null) {
             	imageButton = new ImageButton(mContext);
@@ -244,7 +257,6 @@ public class FoodIntake extends Activity {
             	imageButton = (ImageButton) convertView;
             }
 */
-            return imageButton;
         }
 
         private Context mContext;
