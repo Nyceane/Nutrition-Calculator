@@ -45,7 +45,6 @@ public class FoodIntake extends Activity {
 	private ImageButton btnRew;
 	private ImageButton btnForward;
 	private int currentCategory;
-	private int mFoodPositionId;
 	
 	protected ArrayList<FoodObject> _arrayIntake;
 	
@@ -160,10 +159,12 @@ public class FoodIntake extends Activity {
 	 */
 	public void AddFood(int position)
 	{
+		Log.i("Drag", "Add Food: " + String.valueOf(position));
 		boolean neverTaken = true;
-		FoodObject foodtaken = (FoodObject)gridFood.getAdapter().getItem(position);
-		for(int i = 0; i < _arrayIntake.size(); i++)
-		{
+		GridView grid = (GridView)flipper.getCurrentView();
+		FoodAdapter adapter = (FoodAdapter)grid.getAdapter();
+		FoodObject foodtaken =  (FoodObject)adapter.getItem(position);
+		for(int i = 0; i < _arrayIntake.size(); i++) {
 			if(_arrayIntake.get(i).GetFoodId() == foodtaken.GetFoodId())
 			{
 				_arrayIntake.get(i).AddServing();
@@ -296,16 +297,14 @@ public class FoodIntake extends Activity {
                         gridIntake.setBackgroundColor(Color.TRANSPARENT);
                 } else if (event.getAction() == DragEvent.ACTION_DROP){
                         if (insideOfMe){
-                        	if(FoodIntake.this.mFoodPositionId != 0)
-                        	{
-                        		FoodIntake.this.AddFood(Integer.valueOf(FoodIntake.this.mFoodPositionId));
-                        	}
+                    		ClipData clipData = event.getClipData();
+                        	int position = Integer.parseInt(String.valueOf(clipData.getItemAt(0).getText()));
+                    		FoodIntake.this.AddFood(Integer.valueOf(position));
                         }
                     	Log.i(TAG, "Dropped the icon");
                 } else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED){
                         self.setBackgroundDrawable(border);        
                     	Log.i(TAG, "Drag Ended");
-                    	FoodIntake.this.mFoodPositionId = 0;
                 }
                 return true;
         }

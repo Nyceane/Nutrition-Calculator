@@ -18,18 +18,21 @@ import android.view.ViewGroup;
 public class ViewScroller extends ViewFlipper {
 	float oldTouchValue = 0;
 	int category;
+	int nextCategory;
 	private Context mContext;
 	
 	public ViewScroller(Context context) {
 		super(context);
 		mContext = context;
 		category = 1;
+		nextCategory = 2;
 	}
 
 	public ViewScroller(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
 		category = 1;
+		nextCategory = 2;
 	}
 
 	
@@ -45,6 +48,10 @@ public class ViewScroller extends ViewFlipper {
 	    }
 	    case MotionEvent.ACTION_UP: {
 	    	Log.i("Scroller", "ACTION_UP");
+        	if (nextCategory < 1 || nextCategory > 6) {
+        		return false;
+        	}
+        	
 			float currentX = touchEvent.getX();
 			if (oldTouchValue < currentX) {
 				this.setInAnimation(AnimationHelper.inFromLeftAnimation());
@@ -76,22 +83,24 @@ public class ViewScroller extends ViewFlipper {
         	}
         	
         	// Right or left?
-        	int otherCategory;
         	if (distance > 0) {
         		// Right
-            	otherCategory = ((FoodAdapter)currentView.getAdapter()).category - 1;
+            	nextCategory = ((FoodAdapter)currentView.getAdapter()).category - 1;
         	}
         	else {
         		// Left
-            	otherCategory = ((FoodAdapter)currentView.getAdapter()).category + 1;
+            	nextCategory = ((FoodAdapter)currentView.getAdapter()).category + 1;
         	}
         	
+        	if (nextCategory < 1 || nextCategory > 6) {
+        		return false;
+        	}
         	
         	//Log.i("Scroller", "Other Category = " + String.valueOf(otherCategory));
         	FoodAdapter otherAdapter = (FoodAdapter)otherView.getAdapter();
-        	if (otherAdapter == null || otherAdapter.category != otherCategory) {
+        	if (otherAdapter == null || otherAdapter.category != nextCategory) {
         		Log.i("Scroller", "set adapter");
-        		otherView.setAdapter(new FoodAdapter(this.mContext, otherCategory));
+        		otherView.setAdapter(new FoodAdapter(this.mContext, nextCategory));
         	}
         	
     	    currentView.layout(distance, currentView.getTop(), currentView.getRight(), 
