@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.paschar.nutrition.R;
 import com.paschar.nutrition.adapters.FoodAdapter;
+import com.paschar.nutrition.logics.Membership;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,6 +18,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -310,8 +313,40 @@ public class FoodIntake extends Activity {
 
     public void btnPayment_Clicked(View view)
 	{
-        Intent myIntent = new Intent(view.getContext(), Payment.class);
+        Intent myIntent = new Intent(this, Payment.class);
         startActivityForResult(myIntent, 0);
-
     }
+    
+    public void btnGraph_Clicked(View view)
+	{
+        Intent myIntent = new Intent(this, NutritionGraphActivity.class);
+        startActivityForResult(myIntent, 0);
+    }
+    
+	//Menu Options
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu, menu);
+
+		return super.onCreateOptionsMenu(menu);
+	}
+    
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {			
+			case R.id.menu_monthly:
+				boolean isActivated = Membership.CheckIsMemberActive(this);
+				if(isActivated)
+				{
+					btnGraph_Clicked(null);
+				}
+				else
+				{
+					btnPayment_Clicked(null);	
+				}
+				return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 }

@@ -4,10 +4,6 @@ import com.paypal.android.MEP.PayPalResultDelegate;
 
 import java.io.Serializable;
 
-import java.io.Serializable;
-
-import com.paypal.android.MEP.PayPalResultDelegate;
-
 public class PaymentResultDelegate implements PayPalResultDelegate, Serializable {
 
 	private static final long serialVersionUID = 10001L;

@@ -120,14 +120,7 @@
 					android:src="@drawable/calculate_button"
 					android:text="Calculate"
 					android:onClick="btnCalculate_Clicked"
-				/>					
-				            <Button
-                   android:id="@+id/btnPayment"
-                   android:gravity="right"
-                   android:layout_height="wrap_content"
-                   android:layout_width="wrap_content"
-                   android:onClick="btnPayment_Clicked"
-                   android:text="Pay subscription fee"/>
+				/>
 			</LinearLayout>
 		</LinearLayout>
 	</LinearLayout>

@@ -26,6 +26,10 @@
                   android:label="@string/payment"
                   android:screenOrientation="landscape"
                 />
+		<activity 	android:name=".NutritionGraphActivity"
+					android:label="@string/monthly"
+					android:screenOrientation="landscape"
+				/>
     </application>
 
 	<uses-permission android:name="android.permission.INTERNET" />

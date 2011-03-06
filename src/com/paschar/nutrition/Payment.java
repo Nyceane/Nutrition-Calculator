@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
+
+import com.paschar.nutrition.logics.Membership;
 import com.paypal.android.MEP.*;
 
 import java.math.BigDecimal;
@@ -186,13 +186,16 @@ public class Payment extends Activity implements View.OnClickListener {
     	if(requestCode != request)
     		return;
 
+    	if(resultCode == Activity.RESULT_OK)
+    	{
+    		Membership.MemberActivation(this);
+    	}
+    	
     	launchSimplePayment.updateButton();
 
     	title.setText(resultTitle);
     	title.setVisibility(View.VISIBLE);
     	info.setText(resultInfo);
     	info.setVisibility(View.VISIBLE);
-    	extra.setText(resultExtra);
-    	extra.setVisibility(View.VISIBLE);
     }
 }

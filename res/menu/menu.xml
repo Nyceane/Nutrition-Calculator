@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/menu_monthly"
+		android:icon="@android:drawable/ic_menu_month"
+		android:title="Nutrition Graph" />
+		    
+	<item
+		android:id="@+id/menu_feedback"
+		android:icon="@android:drawable/ic_menu_myplaces"
+		android:title="Feedback" />
+				
+	<item
+		android:id="@+id/menu_help"
+		android:icon="@android:drawable/ic_menu_help"
+		android:title="Help" />
+</menu>

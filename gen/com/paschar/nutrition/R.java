@@ -172,7 +172,6 @@ containing a value of this type.
         public static final int LinearLayout01=0x7f060004;
         public static final int btnCalculate=0x7f06000e;
         public static final int btnForward=0x7f06000b;
-        public static final int btnPayment=0x7f06000f;
         public static final int btnRew=0x7f060009;
         public static final int drop=0x7f060002;
         public static final int flipper=0x7f060006;
@@ -181,9 +180,9 @@ containing a value of this type.
         public static final int gridIntake=0x7f06000d;
         public static final int layoutFood=0x7f060005;
         public static final int layoutIntake=0x7f06000c;
-        public static final int menu_feedback=0x7f060011;
-        public static final int menu_help=0x7f060010;
-        public static final int menu_settings=0x7f060012;
+        public static final int menu_feedback=0x7f060010;
+        public static final int menu_help=0x7f060011;
+        public static final int menu_monthly=0x7f06000f;
         public static final int none=0x7f060000;
         public static final int thumbnail=0x7f060001;
         public static final int txtFoodCategory=0x7f06000a;
@@ -195,7 +194,7 @@ containing a value of this type.
         public static final int main=0x7f030002;
     }
     public static final class menu {
-        public static final int menu_food=0x7f080000;
+        public static final int menu=0x7f080000;
     }
     public static final class string {
         public static final int app_name=0x7f070001;
@@ -207,12 +206,10 @@ containing a value of this type.
         public static final int category_vegetables=0x7f070005;
         public static final int food_filter_title=0x7f070002;
         public static final int hello=0x7f070000;
-        public static final int menu_feedback=0x7f07000a;
         /** Menu
          */
-        public static final int menu_help=0x7f070009;
-        public static final int menu_settings=0x7f07000b;
-        public static final int payment=0x7f07000c;
+        public static final int monthly=0x7f070009;
+        public static final int payment=0x7f07000a;
     }
     public static final class xml {
         public static final int dragableicon=0x7f040000;
