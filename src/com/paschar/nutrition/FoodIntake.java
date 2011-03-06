@@ -7,6 +7,7 @@ import com.paschar.nutrition.R;
 import android.R.color;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class FoodIntake extends Activity {
@@ -37,6 +39,7 @@ public class FoodIntake extends Activity {
 	private ImageButton btnRew;
 	private ImageButton btnForward;
 	private int currentCategory;
+	private int mFoodPositionId;
 	
 	protected ArrayList<FoodObject> _arrayIntake;
 	protected ArrayList<FoodObject> _arrayFood;
@@ -209,19 +212,29 @@ public class FoodIntake extends Activity {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-        	FoodView iconView;
+        	ImageView iconView;
         	if (convertView == null) {
         		iconView = new FoodView(mContext);
             	iconView.setBackgroundColor(color.transparent);
             	iconView.setLayoutParams(new GridView.LayoutParams(100, 100));
                	//iconView.setAdjustViewBounds(false);
-                iconView.setTag(position);
+                FoodIntake.this.mFoodPositionId = position;
         	}
         	else {
         		iconView = (FoodView)convertView;
         	}
         	iconView.setImageResource(_arrayFood.get(position).GetDrawableId());
-        	iconView.mFoodId = position;
+
+        	final int clickPosition = position;
+        	iconView.setOnLongClickListener(new View.OnLongClickListener() {
+                public boolean onLongClick(View v) {
+                    ClipData data = ClipData.newPlainText("food_id", String.valueOf(clickPosition));
+                    DragShadowBuilder shadowBuilder = new DragShadowBuilder(v);
+                    v.startDrag(data, shadowBuilder, v, 0);
+                    FoodIntake.this.mFoodPositionId = clickPosition;
+                    return true;
+                }
+            });
             return iconView;
         }
 
@@ -299,21 +312,25 @@ public class FoodIntake extends Activity {
                 if (event.getAction() == DragEvent.ACTION_DRAG_STARTED){
                         border = self.getBackground();
                         gridIntake.setBackgroundColor(Color.CYAN);
+                        gridIntake.setBackgroundColor(Color.argb(85, 58, 80, 80));
                 } else if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED){ 
                         insideOfMe = true;
-                        gridIntake.setBackgroundColor(Color.BLUE);
+                        gridIntake.setBackgroundColor(Color.argb(85, 89, 72, 52));
                 } else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED){
                         insideOfMe = false;
                         gridIntake.setBackgroundColor(Color.TRANSPARENT);
                 } else if (event.getAction() == DragEvent.ACTION_DROP){
                         if (insideOfMe){
-                        	Log.i(TAG, "Exited dot Tag@ " + self.getTag());
+                        	if(FoodIntake.this.mFoodPositionId != 0)
+                        	{
+                        		FoodIntake.this.AddFood(Integer.valueOf(FoodIntake.this.mFoodPositionId));
+                        	}
                         }
                     	Log.i(TAG, "Dropped the icon");
                 } else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED){
                         self.setBackgroundDrawable(border);        
                     	Log.i(TAG, "Drag Ended");
-
+                    	FoodIntake.this.mFoodPositionId = 0;
                 }
                 return true;
         }
